@@ -1,6 +1,7 @@
 import { NEXT_AUTH } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
@@ -22,8 +23,10 @@ export default async function DashboardPage() {
             <ul>
                 {journal.map((journal) => (
                     <li key={journal.id}>
-                        <h2>{journal.title}</h2>
-                        <p>{journal.content}</p>
+                        <Link href={`/journal/${journal.id}`}>
+                            <h2>{journal.title}</h2>
+                            <p>{journal.content}</p>
+                        </Link>
                     </li>
                 ))}
             </ul>
