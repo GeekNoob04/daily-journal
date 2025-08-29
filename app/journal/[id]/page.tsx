@@ -11,8 +11,9 @@ export default async function JournalPage({ params }: JournalPageProps) {
     if (!session) {
         redirect("/auth/signin");
     }
+    const journalId = params.id;
     const journal = await prisma.journal.findUnique({
-        where: { id: params.id },
+        where: { id: journalId },
     });
     if (!journal || journal.userId !== session.user.id) {
         notFound();

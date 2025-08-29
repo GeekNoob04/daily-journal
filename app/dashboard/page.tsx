@@ -26,6 +26,7 @@ export default async function DashboardPage() {
                         <Link href={`/journal/${journal.id}`}>
                             <h2>{journal.title}</h2>
                             <p>{journal.content}</p>
+                            <p>{journal.mood}</p>
                         </Link>
                     </li>
                 ))}
