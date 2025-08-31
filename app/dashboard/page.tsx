@@ -1,3 +1,4 @@
+import JournalCard from "@/components/JournalCard";
 import { NEXT_AUTH } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
@@ -11,7 +12,9 @@ export default async function DashboardPage() {
     }
     const journals = await prisma.journal.findMany({
         where: {
-            userId: session.user.id,
+            user: {
+                email: session.user.email,
+            },
         },
         orderBy: {
             createdAt: "desc",
@@ -44,28 +47,7 @@ export default async function DashboardPage() {
             ) : (
                 <div className="grid gap-4">
                     {journals.map((journal) => (
-                        <div
-                            key={journal.id}
-                            className="border rounded-lg p-4 hover:shadow-md transition-shadow"
-                        >
-                            <Link href={`/journal/${journal.id}`}>
-                                <h2 className="text-xl font-semibold mb-2">
-                                    {journal.title}
-                                </h2>
-                                <p className="text-gray-600 mb-2 line-clamp-2">
-                                    {journal.content}
-                                </p>
-                                <div className="flex items-center gap-2 text-sm text-gray-500">
-                                    <span>Mood: {journal.mood}</span>
-                                    <span>•</span>
-                                    <span>
-                                        {new Date(
-                                            journal.createdAt
-                                        ).toLocaleDateString()}
-                                    </span>
-                                </div>
-                            </Link>
-                        </div>
+                        <JournalCard key={journal.id} journal={journal} />
                     ))}
                 </div>
             )}
