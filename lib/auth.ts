@@ -5,7 +5,7 @@ import GitHubProvider from "next-auth/providers/github";
 import prisma from "./prisma";
 import bcrypt from "bcryptjs";
 export const NEXT_AUTH = {
-    adapter: PrismaAdapter(prisma), 
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "Email",
@@ -102,6 +102,11 @@ export const NEXT_AUTH = {
             session.user.name = token.name || "User";
             session.user.email = token.email;
             return session;
+        },
+        async redirect({ url, baseUrl }: any) {
+            if (url.startsWith(baseUrl)) return url;
+            // always go to dashboard after login
+            return `${baseUrl}/dashboard`;
         },
     },
     session: {
