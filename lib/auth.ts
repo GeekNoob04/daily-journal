@@ -112,7 +112,7 @@ export const NEXT_AUTH = {
     session: {
         strategy: "jwt" as const,
     },
-    pages: {
-        signIn: "/auth/signin", 
-    },
+    // pages: {
+    //     signIn: "/auth/signin",
+    // },
 };
