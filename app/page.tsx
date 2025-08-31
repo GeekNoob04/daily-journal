@@ -6,7 +6,7 @@ export default async function HomePage() {
     const session = await getServerSession(NEXT_AUTH);
 
     if (!session) {
-        redirect("/auth/signin");
+        redirect("/api/auth/signin");
     } else {
         redirect("/dashboard");
     }

@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function EditPage() {
     const { id } = useParams();
@@ -9,6 +10,7 @@ export default function EditPage() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [mood, setMood] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchJournal() {
@@ -19,27 +21,39 @@ export default function EditPage() {
                 setMood(res.data.mood);
             } catch (e) {
                 console.error("Error fetching journal:", e);
+                router.push("/dashboard");
             }
         }
         if (id) fetchJournal();
-    }, [id]);
+    }, [id, router]);
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setLoading(true);
         try {
             await axios.put(`/api/journal/${id}`, {
                 title,
                 content,
                 mood,
             });
-            router.push(`/journal/${id}`);
+            router.push("/dashboard");
         } catch (e) {
             console.error("Error updating journal:", e);
             alert("Failed to update journal.");
+        } finally {
+            setLoading(false);
         }
     }
     return (
         <div className="max-w-2xl mx-auto p-6">
-            <h1 className="text-2xl font-bold mb-4">Edit Journal</h1>
+            <div className="flex items-center gap-4 mb-6">
+                <Link
+                    href="/dashboard"
+                    className="text-blue-500 hover:text-blue-600"
+                >
+                    ← Back to Dashboard
+                </Link>
+                <h1 className="text-2xl font-bold">Edit Journal</h1>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                     type="text"
@@ -73,10 +87,25 @@ export default function EditPage() {
                     <option value="happy">😊 Happy</option>
                     <option value="sad">😢 Sad</option>
                     <option value="neutral">😐 Neutral</option>
+                    <option value="excited">🤩 Excited</option>
+                    <option value="anxious">😰 Anxious</option>
+                    <option value="calm">😌 Calm</option>
                 </select>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">
-                    Update Journal
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                    >
+                        {loading ? "Updating..." : "Update Journal"}
+                    </button>
+                    <Link
+                        href="/dashboard"
+                        className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                    >
+                        Cancel
+                    </Link>
+                </div>
             </form>
         </div>
     );

@@ -3,14 +3,17 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function NewEntryPage() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [mood, setMood] = useState("");
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setLoading(true);
         try {
             const res = await axios.post("/api/journal", {
                 title,
@@ -23,18 +26,29 @@ export default function NewEntryPage() {
                 alert("Failed to create journal entry");
             }
         } catch (e) {
-            console.log(e);
+            console.error("Error creating journal:", e);
+            alert("Failed to create journal entry");
+        } finally {
+            setLoading(false);
         }
     }
     return (
         <div className="max-w-2xl mx-auto p-6">
-            <h1 className="text-2xl font-bold mb-4">
-                Create A New Journal Entry
-            </h1>
+            <div className="flex items-center gap-4 mb-6">
+                <Link
+                    href="/dashboard"
+                    className="text-blue-500 hover:text-blue-600"
+                >
+                    ← Back to Dashboard
+                </Link>
+                <h1 className="text-2xl font-bold">
+                    Create A New Journal Entry
+                </h1>
+            </div>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Title"
+                    placeholder="Enter journal title.."
                     value={title}
                     onChange={(e) => {
                         setTitle(e.target.value);
@@ -43,13 +57,13 @@ export default function NewEntryPage() {
                     required
                 />
                 <textarea
-                    placeholder="Content"
+                    placeholder="Write your thoughts here..."
                     value={content}
                     onChange={(e) => {
                         setContent(e.target.value);
                     }}
                     className="w-full border p-2 rounded"
-                    rows={6}
+                    rows={8}
                     required
                 />
                 <select
@@ -59,14 +73,29 @@ export default function NewEntryPage() {
                     }}
                     className="w-full border p-2 rounded"
                 >
-                    <option value="">Select mood</option>
+                    <option value="">Select your mood</option>
                     <option value="happy">😊 Happy</option>
                     <option value="sad">😢 Sad</option>
                     <option value="neutral">😐 Neutral</option>
+                    <option value="excited">🤩 Excited</option>
+                    <option value="anxious">😰 Anxious</option>
+                    <option value="calm">😌 Calm</option>
                 </select>
-                <button className="px-4 py-2 bg-green-500 text-white rounded">
-                    Create
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50"
+                    >
+                        {loading ? "Creating..." : "Create Journal"}
+                    </button>
+                    <Link
+                        href="/dashboard"
+                        className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                    >
+                        Cancel
+                    </Link>
+                </div>
             </form>
         </div>
     );
