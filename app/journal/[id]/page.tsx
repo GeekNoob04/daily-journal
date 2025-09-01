@@ -74,15 +74,15 @@ export default async function JournalPage({ params }: JournalPageProps) {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100">
-            <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
                 {/* Header Section */}
-                <div className="mb-8">
+                <div className="mb-6 sm:mb-8">
                     <Link
                         href="/dashboard"
-                        className="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium mb-6 transition-colors duration-200 group"
+                        className="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium mb-4 sm:mb-6 transition-colors duration-200 group text-sm sm:text-base"
                     >
                         <svg
-                            className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
+                            className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-x-1 transition-transform duration-200 flex-shrink-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -98,20 +98,22 @@ export default async function JournalPage({ params }: JournalPageProps) {
                     </Link>
 
                     <div className="text-center">
-                        <div className="mb-4">
-                            <span className="text-6xl">📖</span>
+                        <div className="mb-3 sm:mb-4">
+                            <span className="text-4xl sm:text-5xl lg:text-6xl">
+                                📖
+                            </span>
                         </div>
                         <div className="mb-2">
                             <span
-                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${moodInfo.color}`}
+                                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium ${moodInfo.color}`}
                             >
-                                <span className="text-lg">
+                                <span className="text-base sm:text-lg">
                                     {moodInfo.emoji}
                                 </span>
                                 {moodInfo.label}
                             </span>
                         </div>
-                        <p className="text-amber-600 text-sm">
+                        <p className="text-amber-600 text-xs sm:text-sm px-2">
                             Created on{" "}
                             {new Date(journal.createdAt).toLocaleDateString(
                                 "en-US",
@@ -127,32 +129,32 @@ export default async function JournalPage({ params }: JournalPageProps) {
                 </div>
 
                 {/* Main Content */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-amber-100 overflow-hidden">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl border border-amber-100 overflow-hidden">
                     {/* Title Section */}
-                    <div className="bg-gradient-to-r from-amber-100 to-orange-100 px-8 py-6 border-b border-amber-200">
-                        <h1 className="text-3xl font-bold text-amber-900 text-center leading-relaxed">
+                    <div className="bg-gradient-to-r from-amber-100 to-orange-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-b border-amber-200">
+                        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-amber-900 text-center leading-relaxed break-words">
                             {journal.title}
                         </h1>
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-8 sm:p-10">
+                    <div className="p-4 sm:p-6 lg:p-8 xl:p-10">
                         <div className="prose prose-amber max-w-none">
-                            <div className="text-amber-900 leading-relaxed text-lg whitespace-pre-wrap">
+                            <div className="text-amber-900 leading-relaxed text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-words">
                                 {journal.content}
                             </div>
                         </div>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="bg-gradient-to-r from-stone-50 to-amber-50 px-8 py-6 border-t border-amber-100">
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch">
+                    <div className="bg-gradient-to-r from-stone-50 to-amber-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-t border-amber-100">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch">
                             <Link
                                 href={`/dashboard/${journal.id}/edit`}
-                                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-200"
+                                className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-200 text-sm sm:text-base"
                             >
                                 <svg
-                                    className="w-5 h-5"
+                                    className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -172,8 +174,8 @@ export default async function JournalPage({ params }: JournalPageProps) {
                 </div>
 
                 {/* Quote Section */}
-                <div className="mt-8 text-center">
-                    <p className="text-amber-700 text-sm italic">
+                <div className="mt-6 sm:mt-8 text-center px-4">
+                    <p className="text-amber-700 text-xs sm:text-sm italic">
                         Every story matters. Every moment captured is a
                         treasure. ✨
                     </p>
