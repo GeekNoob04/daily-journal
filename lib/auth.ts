@@ -4,8 +4,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import prisma from "./prisma";
 import bcrypt from "bcryptjs";
+import { AuthOptions } from "next-auth";
 
-export const NEXT_AUTH = {
+export const NEXT_AUTH: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
@@ -43,7 +44,12 @@ export const NEXT_AUTH = {
                         return null;
                     }
 
-                    return { id: user.id, name: user.name, email: user.email };
+                    return {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        image: null,
+                    };
                 } else {
                     try {
                         const hashedPassword = await bcrypt.hash(
@@ -62,6 +68,7 @@ export const NEXT_AUTH = {
                             id: user.id,
                             name: user.name,
                             email: user.email,
+                            image: null,
                         };
                     } catch (e) {
                         console.error("Error creating user:", e);
@@ -92,12 +99,12 @@ export const NEXT_AUTH = {
             return token;
         },
         async session({ session, token }) {
-            if (!session.user) {
-                session.user = {};
-            }
-            session.user.id = token.id;
-            session.user.name = token.name || "User";
-            session.user.email = token.email;
+            session.user = {
+                id: token.id,
+                name: token.name || "User",
+                email: token.email,
+                image: session.user?.image || null,
+            };
             return session;
         },
         async redirect({ url, baseUrl }) {
@@ -107,7 +114,7 @@ export const NEXT_AUTH = {
     },
 
     session: {
-        strategy: "jwt", // no `as const` needed
+        strategy: "jwt" as const,
     },
 
     pages: {
