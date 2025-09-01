@@ -87,7 +87,7 @@ export default async function DashboardPage() {
                             {journals.map((journal) => (
                                 <div
                                     key={journal.id}
-                                    className="transform transition-all duration-300 hover:scale-[1.02] animate-fade-in-up"
+                                    className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in-up"
                                 >
                                     <JournalCard journal={journal} />
                                 </div>

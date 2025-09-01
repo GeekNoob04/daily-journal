@@ -58,7 +58,7 @@ export default function JournalCard({ journal }: JournalCardProps) {
     const moodInfo = getMoodInfo(journal.mood);
 
     return (
-        <div className="bg-gradient-to-br from-white to-orange-100/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border-2 border-white/60 overflow-hidden transition-all duration-300 transform hover:scale-[1.02] ring-1 ring-orange-200/40">
+        <div className="bg-gradient-to-br from-white to-orange-100/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border-2 border-white/60 overflow-hidden transition-all duration-300 transform ring-1 ring-orange-200/40">
             {/* Header with gradient */}
             <div className="bg-gradient-to-r from-orange-200/60 to-rose-200/50 px-6 py-4 border-b border-orange-300/40">
                 <Link
