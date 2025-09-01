@@ -280,13 +280,6 @@ export default function SignInPage() {
                             </button>
                         </div>
                     </div>
-
-                    {/* Mobile Footer */}
-                    <div className="text-center mt-6 lg:hidden">
-                        <p className="text-stone-600 text-sm">
-                            Start your mindful journey today
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
