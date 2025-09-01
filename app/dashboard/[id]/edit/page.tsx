@@ -26,6 +26,7 @@ export default function EditPage() {
         }
         if (id) fetchJournal();
     }, [id, router]);
+
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
@@ -43,70 +44,200 @@ export default function EditPage() {
             setLoading(false);
         }
     }
+
     return (
-        <div className="max-w-2xl mx-auto p-6">
-            <div className="flex items-center gap-4 mb-6">
-                <Link
-                    href="/dashboard"
-                    className="text-blue-500 hover:text-blue-600"
-                >
-                    ← Back to Dashboard
-                </Link>
-                <h1 className="text-2xl font-bold">Edit Journal</h1>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                    className="w-full border p-2 rounded"
-                    required
-                />
-                <textarea
-                    placeholder="Content"
-                    value={content}
-                    onChange={(e) => {
-                        setContent(e.target.value);
-                    }}
-                    className="w-full border p-2 rounded"
-                    rows={6}
-                    required
-                />
-                <select
-                    value={mood}
-                    onChange={(e) => {
-                        setMood(e.target.value);
-                    }}
-                    className="w-full border p-2 rounded"
-                    required
-                >
-                    <option value="">Select mood</option>
-                    <option value="happy">😊 Happy</option>
-                    <option value="sad">😢 Sad</option>
-                    <option value="neutral">😐 Neutral</option>
-                    <option value="excited">🤩 Excited</option>
-                    <option value="anxious">😰 Anxious</option>
-                    <option value="calm">😌 Calm</option>
-                </select>
-                <div className="flex gap-2">
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
-                    >
-                        {loading ? "Updating..." : "Update Journal"}
-                    </button>
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100">
+            <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="mb-8">
                     <Link
                         href="/dashboard"
-                        className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                        className="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium mb-6 transition-colors duration-200 group"
                     >
-                        Cancel
+                        <svg
+                            className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M15 19l-7-7 7-7"
+                            />
+                        </svg>
+                        Back to Dashboard
                     </Link>
+
+                    <div className="text-center">
+                        <div className="mb-4">
+                            <span className="text-6xl">✏️</span>
+                        </div>
+                        <h1 className="text-4xl font-bold text-amber-900 mb-2">
+                            Edit Journal Entry
+                        </h1>
+                        <p className="text-amber-700 text-lg">
+                            Update your thoughts, feelings, and memories
+                        </p>
+                    </div>
                 </div>
-            </form>
+
+                {/* Main Form */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-amber-100 overflow-hidden">
+                    <div className="p-8 sm:p-10">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            {/* Title Input */}
+                            <div className="space-y-2">
+                                <label className="block text-sm font-semibold text-amber-900">
+                                    Journal Title
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Give your entry a meaningful title..."
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    className="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-amber-50/50 placeholder-amber-600 text-amber-900 transition-all duration-200"
+                                    required
+                                />
+                            </div>
+
+                            {/* Content Textarea */}
+                            <div className="space-y-2">
+                                <label className="block text-sm font-semibold text-amber-900">
+                                    Your Thoughts
+                                </label>
+                                <textarea
+                                    placeholder="Pour your heart out... What's on your mind today?"
+                                    value={content}
+                                    onChange={(e) => setContent(e.target.value)}
+                                    className="w-full px-4 py-4 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-amber-50/50 placeholder-amber-600 text-amber-900 transition-all duration-200 resize-none"
+                                    rows={10}
+                                    required
+                                />
+                            </div>
+
+                            {/* Mood Selector */}
+                            <div className="space-y-2">
+                                <label className="block text-sm font-semibold text-amber-900">
+                                    Current Mood
+                                </label>
+                                <select
+                                    value={mood}
+                                    onChange={(e) => setMood(e.target.value)}
+                                    className="w-full px-4 py-3 border border-amber-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-amber-50/50 text-amber-900 transition-all duration-200"
+                                    required
+                                >
+                                    <option value="">
+                                        How are you feeling today?
+                                    </option>
+                                    <option value="happy">
+                                        😊 Happy - Feeling joyful and content
+                                    </option>
+                                    <option value="sad">
+                                        😢 Sad - Going through a tough time
+                                    </option>
+                                    <option value="neutral">
+                                        😐 Neutral - Just an ordinary day
+                                    </option>
+                                    <option value="excited">
+                                        🤩 Excited - Full of energy and
+                                        enthusiasm
+                                    </option>
+                                    <option value="anxious">
+                                        😰 Anxious - Feeling worried or stressed
+                                    </option>
+                                    <option value="calm">
+                                        😌 Calm - Peaceful and relaxed
+                                    </option>
+                                </select>
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-200"
+                                >
+                                    {loading ? (
+                                        <>
+                                            <svg
+                                                className="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <circle
+                                                    className="opacity-25"
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="10"
+                                                    stroke="currentColor"
+                                                    strokeWidth="4"
+                                                ></circle>
+                                                <path
+                                                    className="opacity-75"
+                                                    fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                ></path>
+                                            </svg>
+                                            Updating...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <svg
+                                                className="w-5 h-5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M5 13l4 4L19 7"
+                                                />
+                                            </svg>
+                                            Update Journal Entry
+                                        </>
+                                    )}
+                                </button>
+
+                                <Link
+                                    href="/dashboard"
+                                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-8 py-4 bg-stone-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl hover:bg-stone-700 transform hover:scale-105 transition-all duration-200"
+                                >
+                                    <svg
+                                        className="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                    Cancel
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* Decorative bottom section */}
+                    <div className="bg-gradient-to-r from-amber-100 to-orange-100 px-8 py-6">
+                        <div className="text-center">
+                            <p className="text-amber-800 text-sm italic">
+                                Every word matters. Every edit brings clarity. —
+                                Your Journal
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
