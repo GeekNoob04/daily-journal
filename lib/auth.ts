@@ -4,43 +4,36 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import prisma from "./prisma";
 import bcrypt from "bcryptjs";
+
 export const NEXT_AUTH = {
     adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "Email",
             credentials: {
-                name: {
-                    label: "name",
-                    type: "text",
-                    placeholder: "name",
-                },
+                name: { label: "Name", type: "text", placeholder: "Your name" },
                 username: {
-                    label: "username",
+                    label: "Email",
                     type: "text",
-                    placeholder: "email",
+                    placeholder: "email@example.com",
                 },
-                password: {
-                    label: "password",
-                    type: "password",
-                    placeholder: "password",
-                },
+                password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
                 if (!credentials?.username || !credentials?.password) {
                     return null;
                 }
-                console.log(credentials);
+
                 let user = await prisma.user.findUnique({
-                    where: {
-                        email: credentials.username,
-                    },
+                    where: { email: credentials.username },
                 });
+
                 if (user) {
                     if (!user.password) {
                         console.log("User exists but has no password");
                         return null;
                     }
+
                     const isValid = await bcrypt.compare(
                         credentials.password,
                         user.password
@@ -49,11 +42,8 @@ export const NEXT_AUTH = {
                         console.log("Invalid password");
                         return null;
                     }
-                    return {
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                    };
+
+                    return { id: user.id, name: user.name, email: user.email };
                 } else {
                     try {
                         const hashedPassword = await bcrypt.hash(
@@ -67,27 +57,31 @@ export const NEXT_AUTH = {
                                 password: hashedPassword,
                             },
                         });
+
                         return {
                             id: user.id,
                             name: user.name,
                             email: user.email,
                         };
                     } catch (e) {
-                        console.log("Error creating user:", e);
+                        console.error("Error creating user:", e);
                         return null;
                     }
                 }
             },
         }),
+
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+            clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
         }),
+
         GitHubProvider({
-            clientId: process.env.GITHUB_ID || "",
-            clientSecret: process.env.GITHUB_SECRET || "",
+            clientId: process.env.GITHUB_ID ?? "",
+            clientSecret: process.env.GITHUB_SECRET ?? "",
         }),
     ],
+
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
@@ -98,20 +92,24 @@ export const NEXT_AUTH = {
             return token;
         },
         async session({ session, token }) {
+            if (!session.user) {
+                session.user = {};
+            }
             session.user.id = token.id;
             session.user.name = token.name || "User";
             session.user.email = token.email;
             return session;
         },
-        async redirect({ url, baseUrl }: any) {
+        async redirect({ url, baseUrl }) {
             if (url.startsWith(baseUrl)) return url;
-            // always go to dashboard after login
-            return `${baseUrl}/dashboard`;
+            return `${baseUrl}/dashboard`; // always go to dashboard
         },
     },
+
     session: {
-        strategy: "jwt" as const,
+        strategy: "jwt", // no `as const` needed
     },
+
     pages: {
         signIn: "/auth/signin",
     },
