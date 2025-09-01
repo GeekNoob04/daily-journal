@@ -20,7 +20,7 @@ export default function Navbar() {
                     href={session ? "/dashboard" : "/"}
                     className="font-semibold text-xl text-white hover:text-gray-200 transition-colors duration-200"
                 >
-                    Daily Journal
+                    Memento
                 </Link>
             </div>
 

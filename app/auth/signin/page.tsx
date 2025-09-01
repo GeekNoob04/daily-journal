@@ -70,7 +70,7 @@ export default function SignInPage() {
                     <div className="mb-10">
                         <div className="text-7xl mb-8 animate-pulse">📔</div>
                         <h2 className="text-5xl font-bold text-amber-900 mb-6 leading-tight">
-                            Daily Journal
+                            Memento
                         </h2>
                         <p className="text-lg text-amber-800 leading-relaxed mb-6">
                             Transform your thoughts into lasting memories. Track
@@ -147,7 +147,7 @@ export default function SignInPage() {
                     {/* Mobile Logo */}
                     <div className="text-center mb-6 lg:hidden">
                         <h1 className="text-4xl font-bold text-amber-900 mb-2">
-                            📔 Daily Journal
+                            📔 Memento
                         </h1>
                     </div>
 
