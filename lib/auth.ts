@@ -90,6 +90,10 @@ export const NEXT_AUTH: AuthOptions = {
     ],
 
     callbacks: {
+        async signIn({ user, account, profile, email, credentials }) {
+            console.log("SignIn callback:", { user, account, profile });
+            return true;
+        },
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
