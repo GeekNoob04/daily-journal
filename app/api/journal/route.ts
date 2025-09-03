@@ -1,7 +1,7 @@
 import { NEXT_AUTH } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -31,6 +31,6 @@ export async function POST(req: NextRequest) {
             userId: user.id,
         },
     });
-    revalidatePath("/dashboard"); // Not fix
+    // revalidatePath("/dashboard"); 
     return NextResponse.json(journal);
 }
