@@ -42,7 +42,6 @@ export default async function DashboardPage() {
                     </div>
                 </div>
 
-                {/* Content Section */}
                 {journals.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-12 sm:py-16 px-4">
                         <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 max-w-md w-full text-center border border-amber-100">
@@ -101,7 +100,6 @@ export default async function DashboardPage() {
                 )}
             </div>
 
-            {/* Fixed Floating Create Button - Center Bottom */}
             {journals.length > 0 && (
                 <div className="fixed bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-50">
                     <Link

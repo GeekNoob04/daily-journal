@@ -14,7 +14,6 @@ export default function SignInPage() {
     const router = useRouter();
 
     useEffect(() => {
-        // Check if user is already logged in
         const checkSession = async () => {
             const session = await getSession();
             if (session) {
@@ -63,10 +62,8 @@ export default function SignInPage() {
 
     return (
         <div className="min-h-screen bg-stone-100 flex flex-col lg:flex-row overflow-hidden">
-            {/* Left Side - Features & Branding */}
             <div className="hidden md:flex lg:w-1/2 bg-gradient-to-br from-amber-50 to-orange-50 items-center justify-center p-4 md:p-6 lg:p-12">
                 <div className="max-w-lg w-full">
-                    {/* Hero Section */}
                     <div className="mb-6 lg:mb-10">
                         <div className="text-5xl md:text-6xl lg:text-7xl mb-4 lg:mb-8 animate-pulse text-center md:text-left">
                             📔
@@ -81,7 +78,6 @@ export default function SignInPage() {
                         </p>
                     </div>
 
-                    {/* Features */}
                     <div className="space-y-3 lg:space-y-4">
                         <div className="flex items-center space-x-3 lg:space-x-4 bg-white/70 backdrop-blur-sm p-3 lg:p-4 rounded-xl border border-amber-100 hover:bg-white/90 transition-all duration-300 hover:shadow-md">
                             <div className="bg-gradient-to-br from-purple-300 to-red-300 p-2 lg:p-3 rounded-full shadow-sm flex-shrink-0">
@@ -129,7 +125,6 @@ export default function SignInPage() {
                         </div>
                     </div>
 
-                    {/* Testimonial */}
                     <div className="mt-6 lg:mt-8 p-4 lg:p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-amber-200 shadow-lg">
                         <p className="text-amber-800 italic text-center mb-2 text-xs lg:text-sm">
                             Writing is the medicine I need to heal myself and be
@@ -142,17 +137,14 @@ export default function SignInPage() {
                 </div>
             </div>
 
-            {/* Right Side - Auth Form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 bg-stone-50 overflow-y-auto min-h-screen lg:min-h-0">
                 <div className="w-full max-w-md">
-                    {/* Mobile Logo */}
                     <div className="text-center mb-6 md:hidden">
                         <h1 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-2">
                             📔 Memento
                         </h1>
                     </div>
 
-                    {/* Tablet Logo (visible on md screens when left side is hidden) */}
                     <div className="text-center mb-6 hidden md:block lg:hidden">
                         <h1 className="text-4xl font-bold text-amber-900 mb-2">
                             📔 Memento
@@ -162,7 +154,6 @@ export default function SignInPage() {
                         </p>
                     </div>
 
-                    {/* Auth Form */}
                     <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 border border-stone-200">
                         <div className="text-center mb-6">
                             <h2 className="text-2xl sm:text-3xl font-bold text-stone-800 mb-3">
@@ -181,7 +172,6 @@ export default function SignInPage() {
                             </div>
                         )}
 
-                        {/* OAuth Buttons */}
                         <div className="space-y-3 mb-6">
                             <button
                                 onClick={() => handleOAuthSignIn("google")}
@@ -243,7 +233,6 @@ export default function SignInPage() {
                             </div>
                         </div>
 
-                        {/* Email/Password Form */}
                         <form
                             onSubmit={handleCredentialsSubmit}
                             className="space-y-4"

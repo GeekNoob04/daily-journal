@@ -37,7 +37,6 @@ export default function NewEntryPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100">
             <div className="max-w-4xl mx-auto px-3 py-4 sm:px-4 sm:py-6 md:px-6 md:py-8 lg:px-8">
-                {/* Header Section */}
                 <div className="mb-6 sm:mb-8">
                     <Link
                         href="/dashboard"
@@ -74,14 +73,12 @@ export default function NewEntryPage() {
                     </div>
                 </div>
 
-                {/* Main Form */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl border border-amber-100 overflow-hidden mx-1 sm:mx-0">
                     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
                         <form
                             onSubmit={handleSubmit}
                             className="space-y-4 sm:space-y-6"
                         >
-                            {/* Title Input */}
                             <div className="space-y-2">
                                 <label className="block text-sm font-semibold text-amber-900">
                                     Journal Title
@@ -96,7 +93,6 @@ export default function NewEntryPage() {
                                 />
                             </div>
 
-                            {/* Content Textarea */}
                             <div className="space-y-2">
                                 <label className="block text-sm font-semibold text-amber-900">
                                     Your Thoughts
@@ -112,7 +108,6 @@ export default function NewEntryPage() {
                                 />
                             </div>
 
-                            {/* Mood Selector */}
                             <div className="space-y-2">
                                 <label className="block text-sm font-semibold text-amber-900">
                                     Current Mood
@@ -232,7 +227,6 @@ export default function NewEntryPage() {
                         </form>
                     </div>
 
-                    {/* Decorative bottom section */}
                     <div className="bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6">
                         <div className="text-center">
                             <p className="text-amber-800 text-xs sm:text-sm italic leading-relaxed">

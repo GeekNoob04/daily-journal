@@ -59,7 +59,6 @@ export default function JournalCard({ journal }: JournalCardProps) {
 
     return (
         <div className="bg-gradient-to-br from-white to-orange-100/50 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl border-2 border-white/60 overflow-hidden transition-all duration-300 transform ring-1 ring-orange-200/40">
-            {/* Header with gradient */}
             <div className="bg-gradient-to-r from-orange-200/60 to-rose-200/50 px-4 py-3 sm:px-6 sm:py-4 border-b border-orange-300/40">
                 <Link
                     href={`/journal/${journal.id}`}
@@ -73,7 +72,6 @@ export default function JournalCard({ journal }: JournalCardProps) {
                     </p>
                 </Link>
 
-                {/* Mood and Date Info */}
                 <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 xs:gap-0 text-sm">
                     <span
                         className={`inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full font-medium text-xs sm:text-sm ${moodInfo.color} w-fit`}
@@ -96,7 +94,6 @@ export default function JournalCard({ journal }: JournalCardProps) {
                 </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="bg-gradient-to-r from-stone-200/50 to-orange-200/50 px-4 py-3 sm:px-6 sm:py-4">
                 {/* Desktop Layout */}
                 <div className="hidden sm:flex items-center gap-3">

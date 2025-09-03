@@ -22,7 +22,6 @@ export default async function JournalPage({ params }: JournalPageProps) {
         notFound();
     }
 
-    // Helper function to get mood emoji and color
     const getMoodInfo = (mood: string) => {
         switch (mood) {
             case "happy":
@@ -75,7 +74,6 @@ export default async function JournalPage({ params }: JournalPageProps) {
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100">
             <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
-                {/* Header Section */}
                 <div className="mb-6 sm:mb-8">
                     <Link
                         href="/dashboard"
@@ -128,16 +126,13 @@ export default async function JournalPage({ params }: JournalPageProps) {
                     </div>
                 </div>
 
-                {/* Main Content */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-xl border border-amber-100 overflow-hidden">
-                    {/* Title Section */}
                     <div className="bg-gradient-to-r from-amber-100 to-orange-100 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-b border-amber-200">
                         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-amber-900 text-center leading-relaxed break-words">
                             {journal.title}
                         </h1>
                     </div>
 
-                    {/* Content Section */}
                     <div className="p-4 sm:p-6 lg:p-8 xl:p-10">
                         <div className="prose prose-amber max-w-none">
                             <div className="text-amber-900 leading-relaxed text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-words">
@@ -146,7 +141,6 @@ export default async function JournalPage({ params }: JournalPageProps) {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="bg-gradient-to-r from-stone-50 to-amber-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-t border-amber-100">
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch">
                             <Link
@@ -173,7 +167,6 @@ export default async function JournalPage({ params }: JournalPageProps) {
                     </div>
                 </div>
 
-                {/* Quote Section */}
                 <div className="mt-6 sm:mt-8 text-center px-4">
                     <p className="text-amber-700 text-xs sm:text-sm italic">
                         Every story matters. Every moment captured is a
